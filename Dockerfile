@@ -24,9 +24,8 @@ RUN npm install
 # Copy the rest of the bot's files
 COPY . .
 
-# Generate the database engine mapping (Fixes the Prisma error)
+# Generate the database engine mapping
 RUN npx prisma generate
 
-# Start the bot directly
-CMD ts-node --transpile-only src/deploy.ts && ts-node --transpile-only src/index.ts
-
+# Deploy commands first, then start the main bot process safely
+CMD ["sh", "-c", "ts-node --transpile-only src/deploy.ts && ts-node --transpile-only src/index.ts"]
