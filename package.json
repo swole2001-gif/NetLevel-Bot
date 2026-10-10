@@ -4,7 +4,8 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc && node ."
+    "build": "tsc",
+    "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "TFAGaming",
@@ -20,8 +21,11 @@
   },
   "devDependencies": {
     "@discordjs/util": "^1.1.1",
+    "@types/node": "^20.0.0",
     "@types/uuid": "^9.0.8",
     "prisma": "^5.22.0",
+    "typescript": "^5.0.0",
     "undici": "^7.7.0"
   }
 }
+
