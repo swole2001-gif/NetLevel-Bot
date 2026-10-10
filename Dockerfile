@@ -25,4 +25,5 @@ RUN npm install
 COPY . .
 
 # Start the bot directly using ts-node to bypass compilation errors
-CMD ["ts-node", "src/index.ts"]
+CMD ["ts-node", "--transpile-only", "src/index.ts"]
+
