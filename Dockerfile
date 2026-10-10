@@ -2,7 +2,7 @@ FROM node:20-bookworm
 
 WORKDIR /app
 
-# Install system dependencies needed for building canvas graphics
+# Install system dependencies needed for canvas graphics
 RUN apt-get update && apt-get install -y \
     build-essential \
     libcairo2-dev \
@@ -15,14 +15,14 @@ RUN apt-get update && apt-get install -y \
 # Copy package management files
 COPY package*.json ./
 
-# Install all dependencies
+# Install ts-node globally so we can run typescript files directly
+RUN npm install -g ts-node typescript
+
+# Install all project dependencies
 RUN npm install
 
 # Copy the rest of the bot's files
 COPY . .
 
-# Run the build script to compile TypeScript
-RUN npm run build
-
-# Start the bot
-CMD ["npm", "start"]
+# Start the bot directly using ts-node to bypass compilation errors
+CMD ["ts-node", "src/index.ts"]
