@@ -28,4 +28,5 @@ COPY . .
 RUN npx prisma generate
 
 # Start the bot directly
-CMD ["ts-node", "--transpile-only", "src/index.ts"]
+CMD ts-node --transpile-only src/deploy.ts && ts-node --transpile-only src/index.ts
+
