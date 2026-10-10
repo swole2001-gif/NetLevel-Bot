@@ -27,5 +27,5 @@ COPY . .
 # Generate the database engine mapping
 RUN npx prisma generate
 
-# Deploy commands first, then start the main bot process safely
-CMD ["ts-node", "--transpile-only", "src/index.ts"]
+# This single line safely deploys commands, moves to the correct folder, and starts the bot
+CMD ts-node --transpile-only src/deploy.ts && ts-node --transpile-only src/index.ts
