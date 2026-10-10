@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y \
 # Copy package management files
 COPY package*.json ./
 
-# Install ts-node globally so we can run typescript files directly
+# Install ts-node globally
 RUN npm install -g ts-node typescript
 
 # Install all project dependencies
@@ -24,6 +24,8 @@ RUN npm install
 # Copy the rest of the bot's files
 COPY . .
 
-# Start the bot directly using ts-node to bypass compilation errors
-CMD ["ts-node", "--transpile-only", "src/index.ts"]
+# Generate the database engine mapping (Fixes the Prisma error)
+RUN npx prisma generate
 
+# Start the bot directly
+CMD ["ts-node", "--transpile-only", "src/index.ts"]
