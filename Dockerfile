@@ -15,9 +15,6 @@ RUN apt-get update && apt-get install -y \
 # Copy package management files
 COPY package*.json ./
 
-# Install ts-node globally
-RUN npm install -g ts-node typescript
-
 # Install all project dependencies
 RUN npm install
 
@@ -27,5 +24,8 @@ COPY . .
 # Generate the database engine mapping
 RUN npx prisma generate
 
-# Clean, single startup file command
-CMD ["ts-node", "--transpile-only", "src/index.ts"]
+# Compile the TypeScript files into pure JavaScript
+RUN npx tsc
+
+# Start the bot directly using the developer's original build folder
+CMD ["node", "dist/index.js"]
