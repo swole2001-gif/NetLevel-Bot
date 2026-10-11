@@ -24,8 +24,5 @@ COPY . .
 # Generate the database engine mapping
 RUN npx prisma generate
 
-# Compile the TypeScript files into pure JavaScript
-RUN npx tsc
-
-# Start the bot directly using the developer's original build folder
-CMD ["node", "dist/index.js"]
+# Start the bot directly to bypass compilation limits
+CMD ["npx", "ts-node", "--transpile-only", "src/index.ts"]
